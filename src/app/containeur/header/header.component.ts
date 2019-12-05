@@ -90,7 +90,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
           }); 
         }
       }));
-      console.log(this.filterOptions);
       
     this.suscription = this.authService.jwtTokenVar.subscribe((jwtToken: JwtToken) => {
       this.jwtTokenHeader = jwtToken;

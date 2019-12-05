@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthService } from './shared/service/auth.service';
+
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'forcebat';
+ 
+
+  constructor(private authService: AuthService) {
+
+  }
+
 }

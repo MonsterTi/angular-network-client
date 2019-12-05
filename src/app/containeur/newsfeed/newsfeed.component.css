@@ -1,0 +1,17 @@
+.messageDiv {
+    width: 19%;
+    margin: auto;
+    margin-top: 50px;
+}
+.containeur {
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.item {
+    max-width: 500px;
+    min-width: 500px;
+    margin: 10px 0;
+}

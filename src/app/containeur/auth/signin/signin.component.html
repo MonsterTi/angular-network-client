@@ -1,0 +1,47 @@
+<div class="containeur">
+  <div class="inputcss">
+      <h2>Connexion</h2>
+    <form [formGroup]="myForm">
+      <span style="color: red;" *ngIf="error">
+        * {{ error }} 
+        <!-- Ici nous avons les response et leur statut de notre api.
+        Ex: res.status(401).json('Le mot de passe est incorrect.') -->
+        
+      </span>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input 
+        formControlName='email' 
+        matInput 
+        placeholder="email" 
+        type="email"
+        required
+        >
+        <mat-error *ngIf="myForm.get('email').invalid">Email n'est pas valide.</mat-error>
+      </mat-form-field>
+      <span class="validateInput" *ngIf="checkInput('email')">
+          <mat-icon class="doneIcon">done</mat-icon>
+        </span>
+      <mat-form-field appearance="outline">
+         <mat-label>Mot de passe</mat-label>
+        <input 
+        formControlName='password' 
+        matInput 
+        placeholder="Mot de passe" 
+        type="password"
+        required>
+        <mat-error *ngIf="myForm.get('password').invalid">Le mot de passe doit comporter au moins 6 caractères et au moins une majuscule.</mat-error>
+      </mat-form-field>
+      <span class="validateInput" *ngIf="checkInput('password')">
+          <mat-icon class="doneIcon">done</mat-icon>
+        </span>
+      <button 
+      (click)="submit()"
+      color="primary"
+      style="margin-top: 29px;" 
+      mat-raised-button>Valider</button>
+    </form>
+    <br><br>
+  </div>
+
+</div>

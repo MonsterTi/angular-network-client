@@ -1,0 +1,68 @@
+<div class="containeur">
+  <div class="inputcss">
+    <h2>Inscription</h2>
+    <span *ngIf="errorExist" style="color: red">
+      <!-- Ici nous avons la response de notre api. -->
+      {{ errorExist }} 
+      <br>
+      <br>
+    </span>
+     <!-- myForm ma propriété qui regroupe tous les formulaires -->
+    <form [formGroup]="myForm"> 
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName='email' placeholder="email" type="email" required>
+        <mat-error *ngIf="myForm.get('email').invalid">Email n'est pas valide.</mat-error>
+      </mat-form-field>
+      <span class="validateInput" *ngIf="checkInput('email')">
+        <mat-icon class="doneIcon">done</mat-icon>
+      </span>
+      <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName='nom' placeholder="Nom" type="text" required>
+      </mat-form-field>
+      <span class="validateInput" *ngIf="checkInput('nom')">
+        <mat-icon class="doneIcon">done</mat-icon>
+      </span>
+      <mat-form-field appearance="outline">
+        <mat-label>Prenom</mat-label>
+        <input matInput formControlName='prenom' placeholder="Prenom" type="text" required>
+      </mat-form-field>
+      <span class="validateInput" *ngIf="checkInput('prenom')">
+        <mat-icon class="doneIcon">done</mat-icon>
+      </span>
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput formControlName='password' placeholder="Mot de passe" type="password" required>
+        <mat-error style="margin-bottom: 40px;" *ngIf="myForm.get('password').invalid">Le mot de passe doit comporter au moins 6 caractères et au moins une majuscule ou minuscule.</mat-error>
+      </mat-form-field>
+      <span class="validateInput" *ngIf="checkInput('password')">
+        <mat-icon class="doneIcon">done</mat-icon>
+      </span>
+      <span 
+      *ngIf="
+      !myForm.get('password').invalid
+      &&
+      !myForm.get('nom').invalid
+      &&
+      !myForm.get('prenom').invalid
+      &&
+      !myForm.get('email').invalid
+      ">  <br>
+          <button (click)="submit()" [disabled] color="primary" mat-raised-button>Valider</button>
+      </span>
+      <span 
+      *ngIf="
+      myForm.get('password').invalid
+      ||
+      myForm.get('nom').invalid
+      ||
+      myForm.get('prenom').invalid
+      ||
+      myForm.get('email').invalid
+      ">  <br>
+          <button (click)="submit()"  color="primary" mat-raised-button disabled>Valider</button>
+      </span>
+    </form>
+  </div>
+</div>

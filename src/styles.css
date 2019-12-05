@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+button:focus {
+    outline: none;
+    border: 0;
+ }
+ a:link,a:visited  {
+    text-decoration: none;
+    color: #303030;
+  }
+
+.mat-form-field-infix {
+   width: 290px !important;
+}

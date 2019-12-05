@@ -1,0 +1,57 @@
+<div class="header-container">
+  <div class="header-gauche">
+    <div class="header-menu">
+      <p>MENU</p>
+    </div>
+    <div class="header-logo" *ngIf="jwtTokenHeader.isAuthenticated">
+      <a [routerLink]="['/newsfeed']">
+        logo
+      </a>
+    </div>
+    <div class="header-logo" *ngIf="!jwtTokenHeader.isAuthenticated">
+        <a [routerLink]="['/']">
+          logo 
+        </a>
+      </div>
+  </div>
+  <span *ngIf="jwtTokenHeader.isAuthenticated">
+  <div class="search-header" [formGroup]="myForm">
+      <mat-form-field appearance="outline">
+          <input matInput
+          formControlName='search' 
+          type="text" 
+          aria-label="Text"  
+          [matAutocomplete]="auto"
+          (keyup)="onKey($event)"
+          (keydown)="onKey($event)">
+          <mat-label>Rechercher</mat-label>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filterOptions | async" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+  </div>
+  </span>
+  <span *ngIf="!jwtTokenHeader.isAuthenticated">
+    <div class="header-category">
+      <a style="margin-right: 20px;" [routerLink]="['/signup']">
+        Inscription
+      </a>
+      <a [routerLink]="['/signin']">
+        Connexion
+      </a>
+    </div>
+  </span>
+  <div class="header-category connected-header" *ngIf="jwtTokenHeader.isAuthenticated">
+    <span class="link-m" [routerLink]="['/newsfeed']">
+      Fil d'actualité
+    </span>
+    <span class="link-m" [routerLink]="['/profil']">
+      Mon profil
+    </span>
+    <span class="link-m" (click)="logout()">
+      Deconnexion
+    </span>
+  </div>
+</div>

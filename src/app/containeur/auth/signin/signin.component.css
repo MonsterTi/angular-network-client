@@ -1,0 +1,38 @@
+.containeur {
+    width: 100%;
+}
+.inputcss {
+    border: 1px #e2e2e2 solid;
+    border-radius: 14px;
+    display: flex;
+    width: 30%;
+    height: 380px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 100px;
+    min-width: 500px;
+    box-shadow: 5px 7px 20px 0px #00000042
+}
+.inputcss form {
+    width: 62%;
+    margin: 0;
+}
+
+button {
+    width: 315px;
+    height: 50px;
+}
+form input {
+    width: 300px;
+}
+.doneIcon {
+    color: green;
+}
+.validateInput {
+    margin-left: 279px;
+    margin-top: -66px;
+    position: absolute;
+    display: inline;
+}

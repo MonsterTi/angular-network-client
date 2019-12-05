@@ -1,0 +1,11 @@
+<div class="containeur">
+  <mat-card>
+    <div class="containeur">
+    <span *ngIf="currentUser | async; let user">
+      <div class="inputcss">
+          <div>Email : {{ user.email }}</div>
+          <div>Name : {{ user.nom }}</div>
+      </div>
+    </span>
+    </div>
+ 

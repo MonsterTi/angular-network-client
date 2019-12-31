@@ -1,0 +1,10 @@
+  <div class="containeur">
+    <span *ngIf="currentUser | async; let user">
+      <div class="inputcss">
+        <div>Email : {{ user.email }}</div>
+        <div>Name : {{ user.nom }}</div>
+      </div>
+    </span>
+  </div>
+
+  <app-newsfeed-minimum [profilNewsfeed]='newsfeed'></app-newsfeed-minimum>

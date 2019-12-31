@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // les autres modules 
-import { ContaineurModModule } from './containeur/c-module/containeur-mod.module';
+import { ComponentsModule } from './components/module/components.module';
 import { UiModule } from './shared/ui/ui.module';
 // Routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +20,6 @@ import { AuthGuard } from './shared/guards/auth.guard';
 // interceptors
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +32,7 @@ import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
     FormsModule,
     ReactiveFormsModule,
     //autres modules 
-    ContaineurModModule,
+    ComponentsModule,
     UiModule,
     // mon module http
     HttpClientModule,

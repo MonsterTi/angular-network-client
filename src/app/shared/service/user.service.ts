@@ -37,13 +37,42 @@ export class UserService {
     ) {
   }
 
+  // rechargement automatique.. (en cours de réalisation)
+  // handleScroll(): void {
+  //   window.onscroll = () => {
+  //     this.detectBottom()
+  //   };
+  // } 
+//   detectBottom(): void {
+//     const windowHeight = window.innerHeight;
+//     const fullHeight = document.body.clientHeight;
+//     const scrolled = window.scrollY;
+//     const percentScrolled = (scrolled * 2) / 100;
+//     console.log(percentScrolled);
+    
+//     if ((window.innerHeight + window.scrollY) <= document.body.offsetHeight) { 
+//       //console.log('en bas');
+//     } else {
+//     }
+// }
+
+  // Profil - Newsfeed de l'utisateur connecté
+  userProfilNewsfeed():Observable<MessageUser> {
+    return this.http.get<MessageUser>('api/user/user-newsfeed');
+  }
+
+  // Newsfeed de l'utilisateur recherché
+  userSearchProfil(data: Object):Observable<MessageUser> {
+    return this.http.post<MessageUser>('api/user/profilsearchnewsfeed', data);
+  }
+
+  // Recherche d'utilisateur
   searchUser(data: Object):Observable<Array<SearchUser>> {
-      //console.log(data);
       return this.http.post<Array<SearchUser>>('api/user/search', data);
   };
 
+  // Fil d'actu (Newsfeed) 
   reloadNewsFeed(): Observable<MessageUser> {
-    //timer(1000, 300000).pipe()
       return this.http.get<MessageUser>('api/user/newsfeed')
   };
 
@@ -60,7 +89,7 @@ export class UserService {
     } else {
       return this.http.get<User>('api/user/current').pipe(
         tap((user: User) => {
-          console.log(user)
+          //console.log(user)
           this.currentUser.next(user)
         }), switchMap(() => {
           return this.currentUser

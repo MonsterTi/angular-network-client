@@ -11,20 +11,24 @@ import {
 } from 'src/app/shared/models/jwtToken.model';
 import {
   Subscription,
-  Observable
+  Observable,
+  of
 } from 'rxjs';
 import {
   FormGroup,
-  Validators,
   FormBuilder
 } from '@angular/forms';
 import {
   startWith,
-  map
+  map,
+  switchMap
 } from 'rxjs/operators';
-import { 
-  UserService 
+import {
+  UserService
 } from 'src/app/shared/service/user.service';
+import {
+  Router
+} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -37,14 +41,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // Pour unsusbscribe et éviter la fuite mémoire.
   public filterOptions: Observable < string[] > ;
   public suscription: Subscription;
-  public suscriptionSearch: Subscription;  
+  public suscriptionSearch: Subscription;
   public myForm: FormGroup;
-  public bool:Boolean
+  public bool: Boolean
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private userService: UserService) {}
+    private userService: UserService,
+    private router: Router) {}
 
   onKey($event) {
     if ($event.code === 'Backspace') {
@@ -55,8 +60,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     };
   }
 
-  public options:string[] = [''];
-
   ngOnInit() {
 
     this.myForm = this.fb.group({
@@ -65,47 +68,40 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.filterOptions = this.myForm.get('search').valueChanges.pipe(
       startWith(null),
-      map((val) => {
-        if (!val) {
-          this.suscription.unsubscribe();
-          return null;
-        } 
-        if (this.bool) {
-        const filterValue = val.trim().toLowerCase();
-        const obj = {search: ''}
-        obj.search = filterValue;
-        this.suscriptionSearch = this.userService.searchUser(obj).subscribe((data)=>{
-         let monTab:string[] = []
-          for (let index = 0; index < data.length; index++) {
-            monTab[index] = data[index].nom
+      switchMap((val) => {
+        if (this.bool && String(val).length < 20) {
+          const obj = {
+            search: ''
           }
-
-          console.log(monTab.filter((option) => { 
-            return option.toLowerCase().startsWith(filterValue)
-          }));
-          
-          return monTab.filter((option) => { 
-            return option.toLowerCase().startsWith(filterValue)
-          })
-          }); 
+          obj.search = val
+          return this.userService.searchUser(obj).pipe(map((data) => {
+            let monTab = [];
+            for (let index = 0; index < data.length; index++) {
+              monTab[index] = data[index];
+            }
+            return monTab;
+          }))
+        } else {
+          return of(null);
         }
       }));
-      
+
     this.suscription = this.authService.jwtTokenVar.subscribe((jwtToken: JwtToken) => {
       this.jwtTokenHeader = jwtToken;
     });
+
   };
 
- 
+  searchId(id: string) {
+    this.router.navigate(['/user-profil', id]);
+  }
 
   ngOnDestroy(): void {
-    this.suscriptionSearch.unsubscribe();
-    if (this.suscription) {
-      this.suscription.unsubscribe();
-    };
+    this.suscription.unsubscribe();
   };
 
   public logout(): void {
+    this.myForm.get('search').reset(null)
     this.authService.logout()
   };
 

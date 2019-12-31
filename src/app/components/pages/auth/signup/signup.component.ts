@@ -15,7 +15,7 @@ from 'src/app/shared/service/auth.service';
 // models
 import {
   User
-} from '../../../shared/models/user.model';
+} from '../../../../shared/models/user.model';
 // router
 import {
   Router

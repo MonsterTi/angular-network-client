@@ -1,0 +1,10 @@
+<div class="messageDiv">
+    <form [formGroup]="myForm">
+          <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="message" matTextareaAutosize matAutosizeMinRows=9 matAutosizeMaxRows=9></textarea>
+          </mat-form-field>
+      <button (click)="submit()" color="primary" mat-raised-button>Valider</button>
+    </form>
+  </div>
+  

@@ -26,8 +26,8 @@
           (keydown)="onKey($event)">
           <mat-label>Rechercher</mat-label>
           <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filterOptions | async" [value]="option">
-              {{ option }}
+            <mat-option *ngFor="let option of filterOptions | async" (click)="searchId(option.id)" [value]="option.nom">
+              {{ option.nom }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -44,14 +44,14 @@
     </div>
   </span>
   <div class="header-category connected-header" *ngIf="jwtTokenHeader.isAuthenticated">
-    <span class="link-m" [routerLink]="['/newsfeed']">
+    <a class="link-m" [routerLink]="['/newsfeed']">
       Fil d'actualité
-    </span>
-    <span class="link-m" [routerLink]="['/profil']">
+    </a>
+    <a class="link-m" [routerLink]="['/profil']">
       Mon profil
-    </span>
-    <span class="link-m" (click)="logout()">
+    </a>
+    <a class="link-m" (click)="logout()">
       Deconnexion
-    </span>
+    </a>
   </div>
 </div>
